@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:sunset/data/api/model/api_day.dart';
+import 'package:sunset/data/api/request/get_day_body.dart';
 
 class SunriseService {
   static const _BASE_URL = 'https://api.sunrise-sunset.org';
@@ -8,14 +9,10 @@ class SunriseService {
     BaseOptions(baseUrl: _BASE_URL),
   );
 
-  Future<ApiDay> getDay({
-    required double latitude,
-    required double longitude,
-}) async {
-    final query = {'lat': latitude, 'lng': longitude, 'formatted': 0};
+  Future<ApiDay> getDay(GetDayBody body) async {
     final response = await _dio.get(
       '/json',
-      queryParameters: query,
+      queryParameters: body.toApi(),
     );
     return ApiDay.fromApi(response.data);
   }
