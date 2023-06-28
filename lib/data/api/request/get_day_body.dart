@@ -1,6 +1,6 @@
 class GetDayBody {
-  final double latitude;
-  final double longitude;
+  final double? latitude;
+  final double? longitude;
 
   GetDayBody({
     required this.latitude,
